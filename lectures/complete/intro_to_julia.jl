@@ -644,7 +644,7 @@ md"multiple dispatch
 "
 
 # ╔═╡ a00e7f75-5a34-447e-b23b-26dbeb15aa9a
-ξ(x::String, y::String) = x * y
+ξ(x::String, y::String) = x * " " * y # a bit different than x * y
 
 # ╔═╡ d833eeef-32ae-4622-b411-78e25ed68551
 ξ(4.0, 3.0)
@@ -653,7 +653,7 @@ md"multiple dispatch
 ξ("OSU", 3) # fails
 
 # ╔═╡ d9da3921-1e3b-42e9-a103-50a8a1561169
-ξ("OSU", " rocks")
+ξ("OSU", "rocks")
 
 # ╔═╡ dd21f7a1-d76a-4a00-b036-db307ce67666
 md"functions can take in our custom data types as arguments"
@@ -662,16 +662,28 @@ md"functions can take in our custom data types as arguments"
 """
 calculate and return the molecular weight of a molecule
 """
-function molecular_wt(molecule::Molecule, atom_to_mass::Dict{String, Float64})
+function molecular_wt(
+	molecule::Molecule, 
+	atom_to_mass::Dict{String, Float64};
+	print_stuff::Bool=false
+)
 	mw = 0.0
 	for atom in molecule.atoms
+		if print_stuff
+			@show atom
+			@show atom_to_mass[atom]
+		end
 		mw += atom_to_mass[atom]
+		# same as:
+		#   mw = mw + atom_to_mass[atom]
 	end
 	return mw
+	# or, in one line:
+	#   return sum(atom_to_mass[atom] for atom in molecule.atoms)
 end
 
 # ╔═╡ 8eb9d71d-7755-458a-92ab-b429d6b121d5
-molecular_wt(molecule, atom_to_mass)
+molecular_wt(molecule, atom_to_mass, print_stuff=true)
 
 # ╔═╡ 0e0a8cba-fd31-11ea-26ed-2d27f95f54ff
 md"## control flow
@@ -684,7 +696,7 @@ e.g., is the indoor air temperature comfortable? what is your preferred drink ba
 temperature = 45.0 # °F
 
 # ╔═╡ 933d5544-fd33-11ea-06af-8debefdb728a
-my_drink = (temperature > 74.0) ? "ice water" : "hot tea"
+my_drink = temperature > 74.0 ? "ice water" : "hot tea"
 
 # ╔═╡ 9ff8ba12-fd33-11ea-2eca-0fe897359d25
 # && = "and"
@@ -696,7 +708,9 @@ md"e.g. write a function to determine if a `Molecule` is a hydrocarbon or not."
 # ╔═╡ 82eb1752-fd31-11ea-17be-11666cb6e2e8
 function is_hydrocarbon(molecule::Molecule)
 	for atom in molecule.atoms
-		if ! ((atom == "C") || (atom == "H"))
+		if ! (atom == "C" || atom == "H")
+		# or:
+		#  if ! (atom in ["C", "H"])
 			return false
 		end
 	end
@@ -719,7 +733,10 @@ rand()
 md"flip a coin"
 
 # ╔═╡ 31f083f4-fd35-11ea-34d3-81f1d3e8dc6b
-landed_on_tails = rand() < 0.5
+coin_flip = rand() < 0.5 ? "H" : "T"
+
+# ╔═╡ b9b40963-50f1-4b8b-a353-42b1da3021ca
+rand(["H", "T"])
 
 # ╔═╡ d65edc64-2b36-435e-ad92-22931078da45
 md"generate a normally distributed number (μ = 0, σ = 1)"
@@ -734,16 +751,13 @@ md"shuffle an array"
 z
 
 # ╔═╡ 55288cb8-fd35-11ea-3d35-e548167cb52e
-begin
-	shuffle!(z)
-	z
-end
+shuffle(z)
 
 # ╔═╡ d8dc6878-fa05-4508-a1c0-1a1f7dfa8021
 md"sample elements from an array (uniform)"
 
 # ╔═╡ 62314e4a-fd35-11ea-271c-d90066d6cdd9
-sample(z, 4, replace=true) # sample four elements randomly, with replacement
+sample(z, 4, replace=false) # sample four elements randomly, with replacement
 
 # ╔═╡ a2693913-4e59-4d16-839c-ab83a18e7e11
 md"sample elements from an array (nonuniform)"
@@ -931,6 +945,7 @@ grow!(tree)
 # ╠═27ef6938-fd35-11ea-07e2-0b28886507bb
 # ╟─47edae53-22a0-413e-9708-15089cd97aef
 # ╠═31f083f4-fd35-11ea-34d3-81f1d3e8dc6b
+# ╠═b9b40963-50f1-4b8b-a353-42b1da3021ca
 # ╟─d65edc64-2b36-435e-ad92-22931078da45
 # ╠═37b27476-fd35-11ea-1892-79927795db0f
 # ╟─11537618-9916-485e-a6ca-a92756d87166
