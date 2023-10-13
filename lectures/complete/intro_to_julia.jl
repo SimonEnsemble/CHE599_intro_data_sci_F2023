@@ -131,6 +131,12 @@ typeof(x)
 # ╔═╡ 16342ee8-b797-4c37-8b21-20fa4fa3999b
 sizeof(x) # bytes
 
+# ╔═╡ 501952e9-da2f-46cf-9131-266d03e336ac
+4 / 0 # infinity
+
+# ╔═╡ 99070218-4e28-4e8d-b168-005e5469e054
+4 / 0 - 2 / 0 # Not a Number (NaN)
+
 # ╔═╡ 32d07345-7f33-4d6f-a601-862e9a2e5919
 md"### `Int64`
 an integer is represented by 64 bits as well.
@@ -473,6 +479,34 @@ vcat(u₁, u₂)
 # ╔═╡ a52e18c1-8441-4cca-b474-abbdc533d721
 hcat(u₁, u₂)
 
+# ╔═╡ a7773da3-737f-4dc6-9da0-a81e15af0f5a
+md"### `Tuple`
+see [here](https://docs.julialang.org/en/v1/manual/types/#Tuple-Types).
+"
+
+# ╔═╡ 5b9cb1c5-ef85-4967-aba4-08c92c1a2544
+my_tuple = ("year", 2023)
+
+# ╔═╡ 8d53dbf7-42b6-47cb-b3f5-f1bdaf5fa075
+typeof(my_tuple)
+
+# ╔═╡ 1b39b4d0-4d63-47a4-9256-0034822dc1a1
+md"### `NamedTuple`
+see [here](https://docs.julialang.org/en/v1/manual/types/#Named-Tuple-Types).
+"
+
+# ╔═╡ 8f085b00-4f56-4d35-8f81-e1af92e3c95e
+my_named_tuple = (; year=2023, month="Oct")
+
+# ╔═╡ b3e219b7-890e-45d3-ab1d-9939eec7a481
+typeof(my_named_tuple)
+
+# ╔═╡ eaff6ae2-177a-462b-b4ae-16cc94f8b652
+my_named_tuple.year
+
+# ╔═╡ 2724fc99-2433-41d1-aec7-e91156d7fd23
+my_named_tuple.month
+
 # ╔═╡ e3af0b56-fd2b-11ea-1a50-cd73d2d9fd48
 md"### custom data structure"
 
@@ -804,6 +838,8 @@ grow!(tree)
 # ╟─181fec1c-fd21-11ea-042c-23828f908e52
 # ╠═11aa062e-fd21-11ea-068b-495c13f48386
 # ╠═16342ee8-b797-4c37-8b21-20fa4fa3999b
+# ╠═501952e9-da2f-46cf-9131-266d03e336ac
+# ╠═99070218-4e28-4e8d-b168-005e5469e054
 # ╟─32d07345-7f33-4d6f-a601-862e9a2e5919
 # ╠═2d622f08-fd22-11ea-2d6a-6bd48280b429
 # ╠═315b0efe-fd22-11ea-1cdd-a5ded834ab2a
@@ -888,6 +924,14 @@ grow!(tree)
 # ╠═dcaf697f-10c6-4ee4-b2a8-05179beffcd4
 # ╠═d5df7396-cb2a-48b1-8d6d-f4078b992542
 # ╠═a52e18c1-8441-4cca-b474-abbdc533d721
+# ╟─a7773da3-737f-4dc6-9da0-a81e15af0f5a
+# ╠═5b9cb1c5-ef85-4967-aba4-08c92c1a2544
+# ╠═8d53dbf7-42b6-47cb-b3f5-f1bdaf5fa075
+# ╟─1b39b4d0-4d63-47a4-9256-0034822dc1a1
+# ╠═8f085b00-4f56-4d35-8f81-e1af92e3c95e
+# ╠═b3e219b7-890e-45d3-ab1d-9939eec7a481
+# ╠═eaff6ae2-177a-462b-b4ae-16cc94f8b652
+# ╠═2724fc99-2433-41d1-aec7-e91156d7fd23
 # ╟─e3af0b56-fd2b-11ea-1a50-cd73d2d9fd48
 # ╠═e9f164b4-fd2b-11ea-1b4b-4b95e685950a
 # ╟─376ef642-fd2d-11ea-10e8-c35996c11e35
