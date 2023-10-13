@@ -379,12 +379,10 @@ pwd() # present working directory to see where CSV looks for files
 url = "https://raw.githubusercontent.com/SimonEnsemble/CHE599_intro_data_sci_F2023/main/lectures/complete/data/incomes.csv"
 
 # ╔═╡ 19233eb0-20b7-41a2-a636-16abdbb9be24
-begin
-	if ! isdir("data")
-		mkdir("data")
-	end
-	download(url, joinpath("data", "incomes.csv"))
-end
+download(url, "incomes.csv")
+
+# ╔═╡ 7d67ee96-f113-4b5c-bce7-4bcb7d66dd58
+isfile("incomes.csv")
 
 # ╔═╡ 1c01557a-035f-11eb-37e8-e9497003725f
 income_data = CSV.read("incomes.csv", DataFrame)
@@ -458,11 +456,23 @@ md"...only rows with a `missing` entry in a certain column.
 # ╔═╡ 3edf858c-0362-11eb-3b47-5f53c1360718
 dropmissing(data_oj, "state")
 
+# ╔═╡ abc61fa6-a4cf-488b-9d17-24296ead7de5
+md"### skip over `missing` values"
+
+# ╔═╡ 2f5baf7f-ace4-4e35-8dc2-5f1bc4905e09
+mean(data_oj[:, "per_capita_income"])
+
+# ╔═╡ 70bca26c-6fee-4d05-a715-9155ac23ead5
+skipmissing(data_oj[:, "per_capita_income"])
+
+# ╔═╡ 23d0f82f-6c61-4bcc-bb86-96bbc7067303
+μ_income = mean(skipmissing(data_oj[:, "per_capita_income"]))
+
 # ╔═╡ da29ea48-7cda-4286-8c59-a5b845268d6d
-md"convert `missing` entries to something different."
+md"### replace `missing` entries with something else"
 
 # ╔═╡ 2919a4e2-895e-4ac7-b5eb-7f635519847c
-coalesce.(data_oj, "?")
+coalesce.(data_oj, μ_income) # replace missing values with mean income
 
 # ╔═╡ Cell order:
 # ╠═560929d7-a01d-4475-bcd2-516ace7da08f
@@ -541,6 +551,7 @@ coalesce.(data_oj, "?")
 # ╠═fdab541a-0393-11eb-0318-3390bd75a95d
 # ╠═717b8f72-61ab-431c-9fc8-d518523b4674
 # ╠═19233eb0-20b7-41a2-a636-16abdbb9be24
+# ╠═7d67ee96-f113-4b5c-bce7-4bcb7d66dd58
 # ╠═1c01557a-035f-11eb-37e8-e9497003725f
 # ╟─4cf973b8-0361-11eb-1777-cf02396ba052
 # ╠═74379f7c-0361-11eb-0192-c59bca513893
@@ -556,5 +567,9 @@ coalesce.(data_oj, "?")
 # ╠═36ba914e-0362-11eb-0aa7-6fda9f1b4d02
 # ╟─38ab5560-0362-11eb-15cb-4595de21d218
 # ╠═3edf858c-0362-11eb-3b47-5f53c1360718
+# ╟─abc61fa6-a4cf-488b-9d17-24296ead7de5
+# ╠═2f5baf7f-ace4-4e35-8dc2-5f1bc4905e09
+# ╠═70bca26c-6fee-4d05-a715-9155ac23ead5
+# ╠═23d0f82f-6c61-4bcc-bb86-96bbc7067303
 # ╟─da29ea48-7cda-4286-8c59-a5b845268d6d
 # ╠═2919a4e2-895e-4ac7-b5eb-7f635519847c
