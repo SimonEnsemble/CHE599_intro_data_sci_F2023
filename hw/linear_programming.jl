@@ -20,7 +20,7 @@ md"# linear programming (LP) exercises
 	solve these problems using `Jump.jl`. docs [here](https://jump.dev/JuMP.jl/stable/tutorials/linear/introduction/). add Markdown cells to structure your content and describe your code step-by-step.
 
 ## optimizing profits
-🐶 the Canine Products company offers two dog foods, Frisky Pup and Husky Hound, that are made from a blend of cereal and meat. a package of Frisky Pup requires 1 pound of cereal and 1.5 pounds of meat, and sells for $7. a package of Husky Hound uses 2 pounds of cereal and 1 pound of meat, and sells for $6. Raw cereal costs $1 per pound and raw meat costs $2 per pound. itt also costs $1.40 to package the Frisky Pup and $0.60 to package the Husky Hound. a total of 240,000 pounds of cereal and 180,000 pounds of meat are available each month. the only production bottleneck is that the factory can only package 110,000 bags of Frisky Pup per month. needless to say, management would like to maximize profit.
+🐶 the Canine Products company offers two dog foods, Frisky Pup and Husky Hound, that are made from a blend of cereal and meat. a package of Frisky Pup requires 1 pound of cereal and 1.5 pounds of meat, and sells for $7. a package of Husky Hound uses 2 pounds of cereal and 1 pound of meat, and sells for $6. Raw cereal costs $1 per pound and raw meat costs $2 per pound. it also costs $1.40 to package the Frisky Pup and $0.60 to package the Husky Hound. a total of 240,000 pounds of cereal and 180,000 pounds of meat are available each month. the only production bottleneck is that the factory can only package 110,000 bags of Frisky Pup per month. needless to say, management would like to maximize profit.
 
 formulate as a linear program, then numerically solve for the solution.
 "
